@@ -1,7 +1,6 @@
 \documentclass[conference]{IEEEtran}
 \IEEEoverridecommandlockouts
 % The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
-\usepackage{cite}
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{algorithmic}
 \usepackage{graphicx}
@@ -10,66 +9,124 @@
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
 
-\title{Paper Title*\\
-{\footnotesize \textsuperscript{*}Note: Sub-titles are not captured in Xplore and
-should not be used}
-\thanks{Identify applicable funding agency here. If none, delete this.}
-}
+\title{Topic classification in Portuguese news articles\\
+{\footnotesize \textsuperscript{*}Note: Sub-titles are not captured in
+Xplore and should not be used} \thanks{Identify applicable funding
+agency here. If none, delete this.} }
 
-\author{\IEEEauthorblockN{1\textsuperscript{st} Given Name Surname}
-\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
-\textit{name of organization (of Aff.)}\\
-City, Country \\
-email address}
-\and
-\IEEEauthorblockN{2\textsuperscript{nd} Given Name Surname}
-\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
-\textit{name of organization (of Aff.)}\\
-City, Country \\
-email address}
-\and
-\IEEEauthorblockN{3\textsuperscript{rd} Given Name Surname}
-\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
-\textit{name of organization (of Aff.)}\\
-City, Country \\
-email address}
-\and
-\IEEEauthorblockN{4\textsuperscript{th} Given Name Surname}
-\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
-\textit{name of organization (of Aff.)}\\
-City, Country \\
-email address}
-\and
-\IEEEauthorblockN{5\textsuperscript{th} Given Name Surname}
-\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
-\textit{name of organization (of Aff.)}\\
-City, Country \\
-email address}
-\and
-\IEEEauthorblockN{6\textsuperscript{th} Given Name Surname}
-\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
-\textit{name of organization (of Aff.)}\\
-City, Country \\
-email address}
-}
+
+\author{\IEEEauthorblockN{André F. Santos}
+\IEEEauthorblockA{\textit{CRACS \& INESC-Porto LA} \\ \textit{Faculty
+of Sciences, University of Porto}\\ Porto, Portugal \\
+afs@inesctec.pt} }
 
 \maketitle
 
-\begin{abstract}
-This document is a model and instructions for \LaTeX.
-This and the IEEEtran.cls file define the components of your paper [title, text, heads, etc.]. *CRITICAL: Do Not Use Symbols, Special Characters, Footnotes, 
-or Math in Paper Title or Abstract.
+\begin{abstract} This document is a model and instructions for \LaTeX.
+This and the IEEEtran.cls file define the components of your paper
+[title, text, heads, etc.]. *CRITICAL: Do Not Use Symbols, Special
+Characters, Footnotes, or Math in Paper Title or Abstract.
 \end{abstract}
 
-\begin{IEEEkeywords}
-component, formatting, style, styling, insert
-\end{IEEEkeywords}
+\begin{IEEEkeywords} topic classification, machine learning, text
+mining \end{IEEEkeywords}
 
 \section{Introduction}
-This document is a model and instructions for \LaTeX.
-Please observe the conference page limits. 
+The last decades have witnessed a fast increase on the rate of publication
+of digital text documents. Traditional document types, such as news
+articles, scientific papers or books are now published online together
+with new formats, such as blog posts or tweets, each having thousands
+or millions of new documents published each day.
 
-\section{Ease of Use}
+And it was not only the publication step which has moved to the
+digital world; in fact, most often nowadays the whole document
+pipeline happens digitally, with virtual tools available for
+preparing, writing, styling, publishing and sharing.
+
+Having the entire workflow happening within the digital world presents
+some opportunities when compared to the traditional process. In
+particular, due to todays processing power, tasks related to the
+manipulation of the information contained within these documents
+(searching, compiling, annotating, sharing, \dots) can now be
+performed automatically and to a large amount of articles.
+
+In addition to the document content (for example, in a news article,
+the \emph{title}, \emph{lead} and \emph{body}), its metadata is also
+important: author(s), date of publication, source, topic, mentioned
+entities and their relations, etc. Some of this metadata might be
+filled in and stored along with the document (e.g. \emph{author} and
+\emph{date of publication}); other is usually extracted from the
+document content (e.g. mentioned entities).
+
+Online news articles first appeared as reprints from traditional
+newspapers; nowadays, however, they represent now the primary source
+of news for some segments of the population, both in developed and
+developing countries (whether consumed directly in the newspaper
+website, or indirectly (e.g. through a social media application or a
+feed catcher).
+
+Unofficially know as \emph{the fourth branch of government}, the press
+plays a vital role within our society, keeping us informed regarding
+the current state of affairs (at a local and global scale) and acting
+as a watchdog for the other three powers (legislative, executive and
+judicial). The (lack of) freedom of press and access to the news in a
+given country is even often considered an indicator of a lack of
+democracy\cite{goode2009social}.
+
+As such, improving the ways citizens can access the information (view
+it, query it and search it) contained in news articles has the
+potential to contribute for a more informed society and, ultimately, a
+better society.
+
+An example of a feature which improves information access is the
+categorization of news articles by the topic (or topics) of its
+content. Having such a categorization may influence the way the
+information is stored, organized, displayed and queried.
+
+The simplest way of achieving this categorization is to have the
+author of the article to manually introduce it (e.g. the journalist
+typing it on the news article authoring framework); however, this
+solution presents some challenges:
+\begin{itemize}
+    \item it increases the amount of work the author has to do
+    \item the author might not be sure which categories are available
+    \item the author might not be sure which category is the best
+        (e.g. \emph{Economy} vs  \emph{Finance}
+    \item it might be impractical if the goal is to categorize an
+        existing (large) corpus
+\end{itemize}
+
+Thus, an automated way of categorizing news articles could solve some
+of these problems and decrease the burden of this task.
+
+The challenges of document classification have been well studied
+within the machine learning research field of study. Given a corpus of
+already classified documents, several algorithms might be applied to
+train a classifier capable of determining the category of additional
+articles.
+
+\section{Methods}
+% 500 articles from each category to train
+% 200 articles to evaluate
+
+\subsection{Classification algorithms}
+\subsubsection{Decision tree}
+\subsubsection{k-nearest neighbors}
+\subsubsection{Naive Bayes}
+\subsubsection{Neural network}
+\subsubsection{Support vector machine}
+
+\subsection{Most informative terms}
+% for real-time topic suggestion (for an IDE for example)
+% memory limit
+% 100 terms? 1000 terms?
+
+\section{Results}
+\subsection{Evaluation}
+\subsection{Limited lexicon}
+
+\section{Discussion}
+
 
 \subsection{Maintaining the Integrity of the Specifications}
 
@@ -172,7 +229,6 @@ surrounding equation.
 \item There is no period after the ``et'' in the Latin abbreviation ``et al.''.
 \item The abbreviation ``i.e.'' means ``that is'', and the abbreviation ``e.g.'' means ``for example''.
 \end{itemize}
-An excellent style manual for science writers is \cite{b7}.
 
 \subsection{Authors and Affiliations}
 \textbf{The class file is designed for, but not limited to, six authors.} A 
@@ -251,34 +307,7 @@ G.) thanks $\ldots$''. Instead, try ``R. B. G. thanks$\ldots$''. Put sponsor
 acknowledgments in the unnumbered footnote on the first page.
 
 \section*{References}
-
-Please number citations consecutively within brackets \cite{b1}. The 
-sentence punctuation follows the bracket \cite{b2}. Refer simply to the reference 
-number, as in \cite{b3}---do not use ``Ref. \cite{b3}'' or ``reference \cite{b3}'' except at 
-the beginning of a sentence: ``Reference \cite{b3} was the first $\ldots$''
-
-Number footnotes separately in superscripts. Place the actual footnote at 
-the bottom of the column in which it was cited. Do not put footnotes in the 
-abstract or reference list. Use letters for table footnotes.
-
-Unless there are six authors or more give all authors' names; do not use 
-``et al.''. Papers that have not been published, even if they have been 
-submitted for publication, should be cited as ``unpublished'' \cite{b4}. Papers 
-that have been accepted for publication should be cited as ``in press'' \cite{b5}. 
-Capitalize only the first word in a paper title, except for proper nouns and 
-element symbols.
-
-For papers published in translation journals, please give the English 
-citation first, followed by the original foreign-language citation \cite{b6}.
-
-\begin{thebibliography}{00}
-\bibitem{b1} G. Eason, B. Noble, and I. N. Sneddon, ``On certain integrals of Lipschitz-Hankel type involving products of Bessel functions,'' Phil. Trans. Roy. Soc. London, vol. A247, pp. 529--551, April 1955.
-\bibitem{b2} J. Clerk Maxwell, A Treatise on Electricity and Magnetism, 3rd ed., vol. 2. Oxford: Clarendon, 1892, pp.68--73.
-\bibitem{b3} I. S. Jacobs and C. P. Bean, ``Fine particles, thin films and exchange anisotropy,'' in Magnetism, vol. III, G. T. Rado and H. Suhl, Eds. New York: Academic, 1963, pp. 271--350.
-\bibitem{b4} K. Elissa, ``Title of paper if known,'' unpublished.
-\bibitem{b5} R. Nicole, ``Title of paper with only first word capitalized,'' J. Name Stand. Abbrev., in press.
-\bibitem{b6} Y. Yorozu, M. Hirano, K. Oka, and Y. Tagawa, ``Electron spectroscopy studies on magneto-optical media and plastic substrate interface,'' IEEE Transl. J. Magn. Japan, vol. 2, pp. 740--741, August 1987 [Digests 9th Annual Conf. Magnetics Japan, p. 301, 1982].
-\bibitem{b7} M. Young, The Technical Writer's Handbook. Mill Valley, CA: University Science, 1989.
-\end{thebibliography}
+\bibliography{article}
+\bibliographystyle{splncs03}
 
 \end{document}

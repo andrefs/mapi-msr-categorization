@@ -1,8 +1,12 @@
 N=article
 
-$N.pdf: $N.tex
+$N.pdf: *.tex *.bib
 	pdflatex $N
+	bibtex $N
 	pdflatex $N
 
+check:
+	aspell -l en -c -t *.tex
+
 clean:
-	rm -rf *.toc *.log *.aux
+	rm -f *.aux *.toc *. *.bbl *.blg *.pdf *.log *.nav *.out *.snm *.vrb
