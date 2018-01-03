@@ -5,9 +5,11 @@
 \usepackage{algorithmic}
 \usepackage{graphicx}
 \usepackage{float}
+\usepackage{booktabs}
 \usepackage{textcomp}
 \usepackage{listings}
 \usepackage{hyperref}
+\usepackage{siunitx}
 \usepackage[T1]{fontenc}
 \usepackage[utf8x]{inputenc}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
@@ -243,7 +245,7 @@ preprocessing the text of the articles:
 
 %TODO
 A document-term matrix was then calculated using the
-\texttt{DocumentTermMatrix} method from the \texttt{tm} package. 
+\texttt{DocumentTermMatrix} method from the \texttt{tm} package.
 For each document in the train set the matrix included all the
 terms which met the following requirements:
 
@@ -271,9 +273,9 @@ relevant terms and increase our classifiers error rate.
 We used the \texttt{removeSparseTerms} function from the \texttt{tm}
 package, and produced three distinct lists of terms:
 \begin{description}
-    \item[$TS_{99}$] contained the terms with a sparcity level below 99\% (912 terms)
-    \item[$TS_{95}$] contained terms whose sparcity was under 95\% (139 terms)
-    \item[$TS_{90}$] contained terms with 90\% or less sparcity (45 terms)
+    \item[$LT_{90}$] contained terms with 90\% or less sparcity
+    \item[$LT_{95}$] contained terms whose sparcity was under 95\%
+    \item[$LT_{99}$] contained the terms with a sparcity level below 99\%
 \end{description}
 
 \subsection{Classification}
@@ -284,8 +286,10 @@ tree (DT), k-nearest neighbors (KNN), naive Bayes (NB), neural network
 machine -- with radial kernel (SVM\textsubscript{RK}) and linear
 kernel (SVM\textsubscript{LK}).
 
+For the process of training a
+
 We trained each of the classifiers three different times, one for each
-list of terms ($TS_{99}$, $TS_{95}$ and $TS_{90}$). Then we evaluated
+list of terms ($LT_{99}$, $LT_{95}$ and $LT_{90}$). Then we evaluated
 each trained classifier using the test dataset.
 
 The test dataset was preprocessed in a way similar to the train set
@@ -295,39 +299,90 @@ terms considered for the train set.
 
 \section{Results}
 
+Table~\ref{tab:size} presents the size of each list of terms after
+removing the 
+
+\begin{tabular}{S[table-format=3.0]}
+\toprule
+{Heading} \\
+\midrule
+1 \\
+10 \\
+100 \\
+\bottomrule
+\end{tabular}
 
 \begin{table}[htbp]
-    \caption{Error rates obtained for each algorithm and each list of
-    terms}
+    \caption{Lists size}
+\begin{center}
+\begin{tabular}{l|SS}
+    & \parbox{6em}{\centering Sparsity\\threshold (\%)}  &
+    \parbox{5em}{\centering Number\\of terms}   \\\hline
+    $LT_{90}$ &  90                 &  45 \\
+    $LT_{95}$ &  95                 & 139 \\
+    $LT_{99}$ &  99                 & 912 \\
+\end{tabular}
+\label{tab:size}
+\end{center}
+\end{table}
+
+
+Table~\ref{tab:error} presents the error rates obtained for each list
+of terms using each of the classifiers, with the value of the best
+classifier for each list highlighted in bold.
+
+\begin{table}[htbp]
+    \caption{Error rates}
 \begin{center}
 \begin{tabular}{l|rrrrrr}
                  & DT            & KNN           & NB   & NN   & SVM\textsubscript{RK} & SVM\textsubscript{LK} \\ \hline
-    $TS_{90}$    & \textbf{0.60} & 0.71          & 0.85 & 0.61 & 0.88                  & 0.88                  \\
-    $TS_{95}$    & 0.70          & \textbf{0.56} & 0.83 & 0.58 & 0.87                  & 0.87                  \\
-    $TS_{99}$    & 0.70          & \textbf{0.35} & 0.87 & 0.76 & 0.87                  & 0.87                  \\
+    $LT_{90}$    & \textbf{0.60} & 0.71          & 0.85 & 0.61 & 0.88                  & 0.88                  \\
+    $LT_{95}$    & 0.70          & \textbf{0.56} & 0.83 & 0.58 & 0.87                  & 0.87                  \\
+    $LT_{99}$    & 0.70          & \textbf{0.35} & 0.87 & 0.76 & 0.87                  & 0.87                  \\
 \end{tabular}
-\label{error}
+\label{tab:error}
 \end{center}
 \end{table}
+
+Table~\ref{tab:exectime} presents the execution time for training the
+algorithm with the lowest error rate for each list of terms.
+
 \begin{table}[htbp]
-    \caption{Categories confusion matrix (k-nearest neighbors)}
+    \caption{Execution times for training}
+\begin{center}
+\begin{tabular}{lcr}
+                 & Algorithm  & Execution time \\\hline
+    $LT_{90}$    & DT         & 12s  \\
+    $LT_{95}$    & KNN        &  3m  \\
+    $LT_{99}$    & KNN        & 57m  \\
+\end{tabular}
+\label{tab:exectime}
+\end{center}
+\end{table}
+
+Table~\ref{tab:confmat} presents the confusion matrix generated using
+the k-nearest neighbors classifier with the $LT_{99}$ list of therms,
+with the number of correct classifications for each category
+highlighted in bold.
+
+\begin{table}[htbp]
+    \caption{Categories confusion matrix ($LT_{99}$ with KNN)}
 \begin{center}
 \begin{tabular}{l|rrrrrrrr}
-& \rotatebox{75}{ciencia} & \rotatebox{75}{cultura} &
+& \rotatebox{75}{ciencia}    & \rotatebox{75}{cultura}  &
     \rotatebox{75}{desporto} & \rotatebox{75}{economia} &
-    \rotatebox{75}{mundo} & \rotatebox{75}{musica} &
-    \rotatebox{75}{pais} & \rotatebox{75}{politica} \\\hline
-ciencia       & \textbf{64} & 18          & 25           & 29           & 21          & 37           & 4           & 2 \\
-cultura       & 4           & \textbf{37} & 16           & 9            & 19          & 107          & 3           & 5 \\
-desporto      & 1           & 4           & \textbf{130} & 8            & 19          & 35           & 2           & 1 \\
-economia      & 0           & 6           & 9            & \textbf{127} & 12          & 32           & 1           & 13 \\
-mundo         & 9           & 8           & 25           & 31           & \textbf{82} & 32           & 1           & 12 \\
-musica        & 0           & 6           & 1            & 1            & 0           & \textbf{180} & 0           & 1 \\
-pais          & 8           & 15          & 24           & 42           & 17          & 64           & \textbf{14} & 16 \\
-politica      & 1           & 8           & 7            & 36           & 19          & 24           & 3           & \textbf{102} \\
-
+    \rotatebox{75}{mundo}    & \rotatebox{75}{musica}   &
+    \rotatebox{75}{pais}     & \rotatebox{75}{politica} \\\hline
+ciencia  & {\bf 127} & 19        & 1          & 6         & 12       & 24        & 11       & 0 \\
+cultura  & 5         & {\bf 102} & 2          & 2         & 3        & 79        & 6        & 1 \\
+desporto & 1         & 3         & {\bf  168} & 7         & 3        & 14        & 4        & 0 \\
+economia & 5         & 3         & 0          & {\bf 146} & 5        & 17        & 14       & 10 \\
+mundo    & 12        & 12        & 7          & 17        & {\bf 90} & 35        & 16       & 11 \\
+musica   & 0         & 2         & 0          & 0         & 2        & {\bf 184} & 1        & 0 \\
+pais     & 9         & 9         & 9          & 19        & 15       & 31        & {\bf 88} & 21 \\
+politica & 1         & 3         & 0          & 30        & 8        & 17        & 14       & {\bf 127} \\
 \end{tabular}
-\label{confmat}
+\label{tab:confmat}
 \end{center}
 \end{table}
 
@@ -335,11 +390,15 @@ politica      & 1           & 8           & 7            & 36           & 19    
 % nested categories
 % or not mutex categories
 
+Looking to the error rate obtained in each of tests performed, we can
+conclude that the best option was to use the largest list of terms
+($LT_{99}$) and the k-nearest neighbors classifier.
+
 
 \section*{Acknowledgment}
 
-André Santos has a scholarship from Fundação para a
-Computação Científica Nacional.
+André Santos has a PhD scholarship from Fundação para a Ciência e
+Tecnologia.
 
 \bibliography{article}
 \bibliographystyle{splncs03}
