@@ -128,13 +128,12 @@ categorization to happen in real time (i.e. as the author types in the
 article text). Figure~\ref{fig:wireframe} presents a suggestion of
 how this feature could look like if implemented on a web application.
 
-
-
 The challenges of document classification have been well studied
-within the machine learning research field of study. Given a corpus of
-already classified documents, several algorithms might be applied to
-train a classifier capable of determining the category of additional
-articles.
+within the machine learning research field of
+study\cite{borko1963automatic,sebastiani2002machine,rubin2012statistical}.
+Given a corpus of already classified documents, several algorithms
+might be applied to train a classifier capable of determining the
+category of additional articles.
 
 In this article, we describe the preliminary results obtained in
 developing a classifier to categorize news articles using a previously
@@ -143,9 +142,13 @@ of implementing such a classifier as lightweight as possible to allow
 it to run on the client side of a web application.
 
 \section{Methods}
-%TODO
-we first needed to choose and obtain a suitable dataset, and then
-cleaning and preparing it to be used to train the classifiers.
+In order to train and evaluate classification algorithms, we first
+needed to choose and obtain a suitable dataset. Preferably, this
+dataset would contain documents were already categorized, which would
+allows to skip the time and effor-consuming step of manually
+categorizing the articles ourselfs. Once this dataset was chosen and
+obtained, we would then clean and prepare it to be used to train the
+classifiers.
 
 \subsection{The dataset}
 We gathered a dataset of news articles published in
@@ -251,7 +254,6 @@ preprocessing the text of the articles:
     \item whitespace was removed and the text was tokenized
 \end{itemize}
 
-%TODO
 A document-term matrix was then calculated using the
 \texttt{DocumentTermMatrix} method from the \texttt{tm} package.
 For each of the 5600 documents preset in the train set the matrix
@@ -264,10 +266,8 @@ included all the terms which met the following requirements:
     \item the term appeared at least in 10 documents
 \end{itemize}
 The algorithm used to weigh the terms in the matrix was the
-\textit{tf-idf}\cite{christopher2008introduction}, and resulted in 3234 terms.
-
-%TODO matrix stats(sparcity etc)
-% inspect(dtm)
+\textit{tf-idf}\cite{christopher2008introduction}. The obtained matrix
+presented a sparsity of 99\% and contained 3234 distinct terms.
 
 The final step was to remove the sparse terms from the matrix.
 This allows to discard terms which might be too specific of the train
