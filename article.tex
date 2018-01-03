@@ -96,7 +96,7 @@ solution presents some challenges:
     \item the author might not be sure which categories are available
     \item the author might not be sure which category is the best
         (e.g. \emph{Economics} vs  \emph{Finance})
-    \item it dows not scale -- e.g. if the goal is to categorize an
+    \item it does not scale -- e.g. if the goal is to categorize an
         existing (large) corpus
 \end{itemize}
 
@@ -109,29 +109,36 @@ already classified documents, several algorithms might be applied to
 train a classifier capable of determining the category of additional
 articles.
 
+In this article, we describe the preliminary results obtained in
+developing a classifier to categorize news articles, and in developing
+a similar classifier with restrictions added to the maximum size of
+the lexicon used % TODO
+
 \section{Methods}
+%TODO
+we first needed to choose and obtain a suitable dataset, and then
+cleaning and preparing it to be used to train the classifiers.
+
 \subsection{The dataset}
 We gathered a dataset of news articles published in
-\textit{Oservador}\footnote{\url{http://observador.pt}}, one of the
+\textit{Observador}\footnote{\url{http://observador.pt}}, one of the
 main Portuguese newspapers, and which stands out from the others for
 being fairly young (it was created in May 2014) and for existing
-exclusively online.
+exclusively online. The initial dataset comprised 42.475 entries, from
+which we used only a subset, for reasons later described.
 
 We gathered all the categories used by Observador, and ordered them
 from the most common to the least common. We selected the ones which
 had more than 1.000 articles in our dataset, and reduced our original
-dataset to include only articles from these categories, which
-were\footnote{Category names translated to English by the authors.}:
-\begin{enumerate}
-    \item International
-    \item National
-    \item Economics
-    \item Politics
-    \item Sports
-    \item Science
-    \item Culture
-    \item Music
-\end{enumerate}
+dataset to include only articles from these categories.
+Figure~\ref{fig:articles} presents an overview of the selected
+categories and the number of articles available for each one.
+
+\begin{figure}[htbp]
+\centerline{\includegraphics[width=.97\columnwidth]{imgs/articles}}
+\caption{Total number of articles retrieved for each category}
+\label{fig:articles}
+\end{figure}
 
 We them randomly selected, from each category, 700 articles to be used
 to train the classifiers, and 200 to be used to evaluate their
@@ -144,37 +151,65 @@ Listing~\ref{lst:article}.
 
 \begin{lstlisting}[caption={Example of JSON representation of an article},label={lst:article}, extendedchars=true]
 {
-  "Type" : "sapo.obj.creativework.article",
-  "Source" : {
-      "Name" : "Observador"
+  Type: "sapo.obj.creativework.article",
+  Source: {
+      Name : "Observador"
   },
-  "Pretitle" : "Benfica",
-  "Title" : "Ruben Amorim com rotura total do ligamento cruzado",
-  "Author" : {
-      "Name" : "Observador"
+  Pretitle: "Benfica",
+  Title: "Ruben Amorim com rotura total do ligamento cruzado",
+  Author: {
+      Name: "Observador"
   },
-  "Tags" : [
+  Tags: [
       "benfica",
       "desporto",
       "futebol",
       "ruben amorim"
   ],
-  "PublishDate" : ISODate("2014-08-25T18:33:00Z"),
-  "Lead" : "Depois de Fejsa, mais uma baixa. O internacional português [...]",
-  "Body" : "<p>O pior cenário confirmou-se. O Benfica informou esta segunda-feira [...]",
-  "URL" : "http://observador.pt/2014/08/25/ruben-amorim-com-rotura-total-ligamento-cruzado/",
-  "CategoryPaths" : [
+  PublishDate: ISODate("2014-08-25T18:33:00Z"),
+  Lead: "Depois de Fejsa, mais uma baixa. O internacional português [...]",
+  Body: "<p>O pior cenário confirmou-se. O Benfica informou esta segunda-feira [...]",
+  URL: "http://observador.pt/2014/08/25/ruben-amorim-com-rotura-total-ligamento-cruzado/",
+  CategoryPaths: [
       "Desporto"
   ],
-  "Domain" : "observador.pt",
-  "Language" : "pt_PT",
+  Domain: "observador.pt",
+  Language: "pt_PT",
   ...
 }
 \end{lstlisting}
 
 \subsection{Preprocessing the articles}
 
+Originally, the dataset was obtained as large (more than 2.5 million
+entries) MongoDB collection, containing articles from several
+Portuguese and international newspapers. The process required to
+transform this collection into data our classifiers could process
+required: querying the database, exporting the news articles and
+splitting them into a train and an evaluation datasets.
+
+The database query selected articles from \texttt{Observador} where
+the body had a length greater than 100 characters (to
+discard some malformed articles which had an empty body or a body
+composed of only a few words), and the categories included at least
+one of the categories we previously selected.
+
+For each article returned by the query, the pretitle, title, subtitle
+and lead fields, if present, were simply copied to a plain text file,
+separated by blank lines. The body field, however, was stored in the
+database in HTML format. As such, the HTML tags had to be stripped,
+and then it was also added to the plain text file.
+
+The files were then stored in folders, separated by the category.
+Furthermore, for each category, 700 articles were allocated to the
+train set, and 200 to the evaluation set.
+
+These preprocessing tasks were accomplished using Bash and Node.js
+scripts.
+
 \subsection{Classification algorithms}
+
+
 \subsubsection{Decision tree}
 \subsubsection{k-nearest neighbors}
 \subsubsection{Naive Bayes}
