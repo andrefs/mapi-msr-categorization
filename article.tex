@@ -29,7 +29,7 @@ afs@inesctec.pt} }
 
 \maketitle
 
-\begin{abstract} 
+\begin{abstract}
 Categorizing news articles according to their contents allows to
 decrease the information entropy in a world where the rate of
 publication of digital text documents is increasing fast. In this
@@ -89,16 +89,17 @@ automatically and targetting a large amount of articles.
 In addition to the document content (for example, in a news article,
 the \emph{title}, \emph{lead} and \emph{body}), its metadata is also
 important: author(s), date of publication, source, topic, mentioned
-entities and their relations, etc. Some of this metadata might be
-filled in and stored along with the document (e.g. \emph{author} and
-\emph{date of publication}); other is usually extracted from the
-document content (e.g. mentioned entities).
+entities and their relations, etc\cite{yaginuma2003metadata,yaginuma2003design}. Some of
+this metadata might be filled in and stored along with the document
+(e.g. \emph{author} and \emph{date of publication}); other is usually
+extracted from the document content (e.g. mentioned
+entities)\cite{vadrevu2005automated}.
 
 An example of a feature which improves information access is the
 categorization of news articles by the topic (or topics) of its
 content\cite{kim2006extracting}. The presence of such a categorization
 may influence the way the information is stored, organized, displayed
-and queried.
+and queried\cite{teitler2008newsstand}.
 
 \begin{figure}[htbp]
 \centerline{\includegraphics[width=.97\columnwidth]{imgs/wireframe}}
@@ -317,6 +318,7 @@ removing the terms whose sparsity was above the corresponding
 threshold.
 
 \begin{table}[htbp]
+    \vspace{-.5cm}
     \caption{Lists size}
 \begin{center}
 \begin{tabular}{l|SS}
@@ -334,6 +336,7 @@ Table~\ref{tab:exectime} presents the execution time for training the
 algorithm with the lowest error rate for each list of terms.
 
 \begin{table}[htbp]
+    \vspace{-.2cm}
     \caption{Execution times for training}
 \begin{center}
 \begin{tabular}{l|cr}
@@ -352,6 +355,7 @@ of terms using each of the classifiers, with the value of the best
 classifier for each list highlighted in bold.
 
 \begin{table}[htbp]
+    \vspace{-.2cm}
     \caption{Error rates}
 \begin{center}
 \begin{tabular}{l|rrrrrr}
