@@ -34,12 +34,12 @@ Categorizing news articles according to their contents allows to
 decrease the information entropy in a world where the rate of
 publication of digital text documents is increasing fast. In this
 article we describe ongoing work which aims to evaluate the
-feasability of implementing a classifier which is lightweight
+feasibility of implementing a classifier which is lightweight
 enough to be used in real time on the client side of a web
-application.  More specifially, we gathered a corpus of Portuguese
+application.  More specifically, we gathered a corpus of Portuguese
 news and used it to train and evaluate several classification
 algorithms. We analyze the results obtained in terms of the
-classifiers error rate, traning time and memory footprint.
+classifiers error rate, training time and memory footprint.
 \end{abstract}
 
 \begin{IEEEkeywords} topic categorization, machine learning, text
@@ -84,7 +84,7 @@ process\cite{o1997comparison}. In particular, due to the current
 processing power commonly available, tasks related to the manipulation
 of the information contained within these documents (searching,
 compiling, annotating, sharing, \dots) can now be performed
-automatically and targetting a large amount of articles.
+automatically and targeting a large amount of articles.
 
 In addition to the document content (for example, in a news article,
 the \emph{title}, \emph{lead} and \emph{body}), its metadata is also
@@ -146,8 +146,8 @@ it to run on the client side of a web application.
 In order to train and evaluate classification algorithms, we first
 needed to choose and obtain a suitable dataset. Preferably, this
 dataset would contain documents were already categorized, which would
-allows to skip the time and effor-consuming step of manually
-categorizing the articles ourselfs. Once this dataset was chosen and
+allows to skip the time and effort-consuming step of manually
+categorizing the articles ourselves. Once this dataset was chosen and
 obtained, we would then clean and prepare it to be used to train the
 classifiers.
 
@@ -282,9 +282,9 @@ relevant terms and increase our classifiers error rate.
 We used the \texttt{removeSparseTerms} function from the \texttt{tm}
 package, and produced three distinct lists of terms:
 \begin{description}
-    \item[$LT_{90}$] contained terms with 90\% or less sparcity
-    \item[$LT_{95}$] contained terms whose sparcity was under 95\%
-    \item[$LT_{99}$] contained the terms with a sparcity level below 99\%
+    \item[$LT_{90}$] contained terms with 90\% or less sparsity
+    \item[$LT_{95}$] contained terms whose sparsity was under 95\%
+    \item[$LT_{99}$] contained the terms with a sparsity level below 99\%
 \end{description}
 
 \subsection{Classification}
