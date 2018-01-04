@@ -1,0 +1,7 @@
+#!/bin/sh
+
+rm -r ./_
+rm -r {train,'eval',dev}/
+mkdir -p _/{mundo,pais,economia,politica,desporto,ciencia,cultura,musica}/
+mkdir -p {train,'eval',dev}/
+

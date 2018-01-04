@@ -1,0 +1,28 @@
+#!/bin/sh
+
+CATEGORIES=(ciencia cultura desporto economia mundo musica pais politica)
+
+mkdir -p dev/{ciencia,cultura,desporto,economia,mundo,musica,pais,politica}
+mkdir -p train/{ciencia,cultura,desporto,economia,mundo,musica,pais,politica}
+mkdir -p 'eval'/{ciencia,cultura,desporto,economia,mundo,musica,pais,politica}
+
+for c in "${CATEGORIES[@]}"; do
+    for i in $(find ./_/$c -type f | sort -R | head); do
+        j=$(basename $i)
+        mv $i dev/${c}/${c}_${j}
+    done
+done
+
+for c in "${CATEGORIES[@]}"; do
+    for i in $(find ./_/$c -type f | sort -R | head -n 700); do
+        j=$(basename $i)
+        mv $i train/${c}/${c}_${j}
+    done
+done
+
+for c in "${CATEGORIES[@]}"; do
+    for i in $(find ./_/$c -type f | sort -R | head -n 200); do
+        j=$(basename $i)
+        mv $i 'eval'/${c}/${c}_${j}
+    done
+done
