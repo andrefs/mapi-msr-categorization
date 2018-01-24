@@ -1,0 +1,90 @@
+\begin{thebibliography}{10}
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\urlprefix}{URL }
+
+\bibitem{allan2006online}
+Allan, S.: Online news: Journalism and the Internet. McGraw-Hill Education (UK)
+  (2006)
+
+\bibitem{boczkowski2005digitizing}
+Boczkowski, P.J.: Digitizing the news: Innovation in online newspapers. mit
+  Press (2005)
+
+\bibitem{bollinger1988tolerant}
+Bollinger, L.C.: The tolerant society. Oxford University Press on Demand (1988)
+
+\bibitem{borko1963automatic}
+Borko, H., Bernick, M.: Automatic document classification. Journal of the ACM
+  (JACM)  10(2),  151--162 (1963)
+
+\bibitem{christopher2008introduction}
+Christopher, D.M., Prabhakar, R., Hinrich, S.: Introduction to information
+  retrieval. An Introduction To Information Retrieval  151,  177 (2008)
+
+\bibitem{chyi1999access}
+Chyi, H.I., Lasorsa, D.: Access, use and preferences for online newspapers.
+  Newspaper Research Journal  20(4),  2--13 (1999)
+
+\bibitem{goode2009social}
+Goode, L.: Social news, citizen journalism and democracy. New media \& society
+  11(8),  1287--1305 (2009)
+
+\bibitem{greer2006evolution}
+Greer, J., Mensing, D.: The evolution of online newspapers: A longitudinal
+  content analysis, 1997-2003. Internet newspapers: The making of a mainstream
+  medium pp. 13--32 (2006)
+
+\bibitem{hilbert2011world}
+Hilbert, M., L{\'o}pez, P.: The world’s technological capacity to store,
+  communicate, and compute information. science  332(6025),  60--65 (2011)
+
+\bibitem{house2009freedom}
+House, F.: Freedom of the Press 2008: A global survey of media independence.
+  Rowman \& Littlefield Publishers (2009)
+
+\bibitem{kim2006extracting}
+Kim, S.M., Hovy, E.: Extracting opinions, opinion holders, and topics expressed
+  in online news media text. In: Proceedings of the Workshop on Sentiment and
+  Subjectivity in Text. pp. 1--8. Association for Computational Linguistics
+  (2006)
+
+\bibitem{o1997comparison}
+O'hara, K., Sellen, A.: A comparison of reading paper and on-line documents.
+  In: Proceedings of the ACM SIGCHI Conference on Human factors in computing
+  systems. pp. 335--342. ACM (1997)
+
+\bibitem{rubin2012statistical}
+Rubin, T.N., Chambers, A., Smyth, P., Steyvers, M.: Statistical topic models
+  for multi-label document classification. Machine learning  88(1),  157--208
+  (2012)
+
+\bibitem{sebastiani2002machine}
+Sebastiani, F.: Machine learning in automated text categorization. ACM
+  computing surveys (CSUR)  34(1),  1--47 (2002)
+
+\bibitem{teitler2008newsstand}
+Teitler, B.E., Lieberman, M.D., Panozzo, D., Sankaranarayanan, J., Samet, H.,
+  Sperling, J.: Newsstand: A new view on news. In: Proceedings of the 16th ACM
+  SIGSPATIAL international conference on Advances in geographic information
+  systems. p.~18. ACM (2008)
+
+\bibitem{vadrevu2005automated}
+Vadrevu, S., Nagarajan, S., Gelgi, F., Davulcu, H.: Automated metadata and
+  instance extraction from news web sites. In: Web Intelligence, 2005.
+  Proceedings. The 2005 IEEE/WIC/ACM International Conference on. pp. 38--41.
+  IEEE (2005)
+
+\bibitem{williams2009personal}
+Williams, P., Leighton~John, J., Rowland, I.: The personal curation of digital
+  objects: A lifecycle approach. In: Aslib Proceedings. vol.~61, pp. 340--363.
+  Emerald Group Publishing Limited (2009)
+
+\bibitem{yaginuma2003design}
+Yaginuma, T., Pereira, T., Baptista, A.A.: Design of metadata elements for
+  digital news articles in the omnipaper project  (2003)
+
+\bibitem{yaginuma2003metadata}
+Yaginuma, T., Pereira, T., Baptista, A.A.: Metadata elements for digital news
+  resource description  (2003)
+
+\end{thebibliography}
