@@ -242,7 +242,7 @@
 
 \begin{document}
 
-\title{Paper Title}
+\title{Topic categorization in Portuguese news articles}
 %If Title is too long, use \titlerunning
 %\titlerunning{Short Title}
 
@@ -301,7 +301,7 @@ developing countries (whether consumed directly in the newspaper
 website, or indirectly e.g. through a social media application or a
 feed catcher)\cite{greer2006evolution,boczkowski2005digitizing,chyi1999access}.
 
-Unofficially know as \emph{the fourth branch of government}, the press
+Unofficially known as \emph{the fourth branch of government}, the press
 plays a vital role within our society, keeping us informed about
 the current state of affairs (at a local and global scale) and acting
 as a watchdog for the other three branches (legislative, executive and
@@ -310,20 +310,20 @@ given country is even often considered an indicator of a lack of
 democracy\cite{goode2009social,house2009freedom}.
 
 As such, improving the ways citizens can access the information (view
-it, query it and search it) contained in news articles has the
-potential to contribute for a more informed and, ultimately, a
-better society\cite{bollinger1988tolerant}.
+it, query it and search for it) contained in news articles has the
+potential to contribute for a more informed and, ultimately, better,
+society\cite{bollinger1988tolerant}.
 
 On the other hand, the last decades have witnessed a fast increase on
 the rate of publication of digital text documents. Traditional
 document types, such as news articles, scientific papers or books are
-now published online together with new formats, such as blog posts or
+now published online along with new formats, such as blog posts or
 tweets, each having thousands or millions of new documents published
 each day\cite{hilbert2011world,allan2006online}.
 
-And it was not only the publication step which has moved to the
-digital world; in fact, most often nowadays the whole document
-lifecycle happens digitally, with virtual tools available for
+Publication is not the only step which has moved to the digital world;
+in fact, most often nowadays the whole document lifecycle happens
+digitally, with virtual tools available for
 researching, writing, styling, publishing and sharing\cite{williams2009personal}.
 
 Having the entire workflow happening within the digital world presents
@@ -357,16 +357,16 @@ and queried\cite{teitler2008newsstand}.
 
 
 The simplest way of achieving this categorization is to have the
-author of the article to manually introduce it (e.g. the journalist
+author of the article manually introducing it (e.g. the journalist
 typing it on the news article authoring framework); however, this
 solution presents some challenges:
 \begin{itemize}
-    \item it increases the amount of work the author has to do
-    \item the author might not be sure which categories are available
-    \item the author might not be sure which category is the best
-        (e.g. \emph{Economics} vs  \emph{Finance})
-    \item it does not scale -- e.g. if the goal is to categorize an
-        existing (large) corpus
+    \item It increases the amount of work the author has to do.
+    \item The author might not be sure which categories are available.
+    \item The author might not be sure which category is the best
+        (e.g. \emph{Economics} vs  \emph{Finance}).
+    \item It does not scale -- e.g. if the goal is to categorize an
+        existing (large) corpus.
 \end{itemize}
 
 Thus, an automated way of categorizing news articles could solve some
@@ -393,11 +393,11 @@ it to run on the client side of a web application.
 \section{Methods}
 In order to train and evaluate classification algorithms, we first
 needed to choose and obtain a suitable dataset. Preferably, this
-dataset would contain documents were already categorized, which would
-allows to skip the time and effort-consuming step of manually
-categorizing the articles ourselves. Once this dataset was chosen and
-obtained, we would then clean and prepare it to be used to train the
-classifiers.
+dataset should contain documents which were previously categorized,
+allowing us to skip the time and effort-consuming task of
+manually categorizing the articles ourselves. Once this dataset was
+chosen and obtained, we would then clean and prepare it to be used to
+train the classifiers.
 
 \subsection{The dataset}
 We gathered a dataset of news articles published in
@@ -462,7 +462,7 @@ Listing~\ref{lst:article}.
 \subsection{Preprocessing the articles}
 \label{sec:preproc}
 
-Originally, the dataset was obtained as large MongoDB collection (more
+Originally, the dataset was obtained as a large MongoDB collection (more
 than 2.5 million entries), containing articles from several Portuguese
 and international newspapers. The process needed to transform this
 collection into data our classifiers could process required querying
@@ -481,40 +481,40 @@ separated by blank lines. The body field, however, was stored in the
 database in HTML format. As such, the HTML tags had to be stripped,
 and then it was also added to the plain text file.
 
-The files were then stored in folders, separated by the category.
-Furthermore, for each category, 700 articles were allocated to the
-train set, and 200 to the evaluation set. These preprocessing tasks
-were accomplished using Bash and Node.js scripts.
+The files were stored in folders, separated by category. For each
+category, 700 articles were allocated to the train set, and 200 to the
+evaluation set. These preprocessing tasks were accomplished using Bash
+and Node.js scripts.
 
-Both datasets were then loaded into R using the
+Both datasets were loaded into R using the
 \texttt{tm}\footnote{\url{https://cran.r-project.org/web/packages/tm/}}
 package. Each was then passed to a function responsible for
 preprocessing the text of the articles:
 
 \begin{itemize}
-    \item the text was converted to lowercase characters
-    \item the Portuguese stopwords were removed
-    \item diacritics were converted to their normalized form (e.g.
-        \framebox{à} $\rightarrow$ \framebox{a})
-    \item punctuation signs were removed
-    \item numbers were removed
-    \item word were stemmed (e.g. \framebox{conseguiram} $\rightarrow$
-        \framebox{consegu})
-    \item whitespace was removed and the text was tokenized
+    \item The text was converted to lowercase characters.
+    \item The Portuguese stopwords were removed.
+    \item Diacritics were converted to their normalized form (e.g.
+        \framebox{à} $\rightarrow$ \framebox{a}).
+    \item Punctuation signs were removed.
+    \item Numbers were removed.
+    \item Word were stemmed (e.g. \framebox{conseguiram} $\rightarrow$
+        \framebox{consegu}).
+    \item White space was removed and the text was tokenized.
 \end{itemize}
 
-A document-term matrix was then calculated using the
-\texttt{DocumentTermMatrix} method from the \texttt{tm} package.
-For each of the 5600 documents preset in the train set the matrix
-included all the terms which met the following requirements:
+A document-term matrix was calculated using the
+\texttt{DocumentTermMatrix} method from the \texttt{tm} package.  For
+each of the 5600 documents present in the train set the matrix included
+all the terms which met the following requirements:
 
 \begin{itemize}
-    \item the term length was between 3 and 30 characters (to discard
-        things like URLs or badly tokenized sentences)
-    \item the term appeared in the document at least twice
-    \item the term appeared at least in 10 documents
+    \item The term length was between 3 and 30 characters (to discard
+        things like URLs or badly tokenized sentences).
+    \item The term appeared in the document at least twice.
+    \item The term appeared at least in 10 documents.
 \end{itemize}
-The algorithm used to weigh the terms in the matrix was the
+The algorithm used to weigh the terms in the matrix was
 \textit{tf-idf}\cite{christopher2008introduction}. The obtained matrix
 presented a sparsity of 99\% and contained 3234 distinct terms.
 
@@ -530,20 +530,19 @@ relevant terms and increase our classifiers error rate.
 We used the \texttt{removeSparseTerms} function from the \texttt{tm}
 package, and produced three distinct lists of terms:
 \begin{description}
-    \item[$LT_{90}$] contained terms with 90\% or less sparsity
-    \item[$LT_{95}$] contained terms whose sparsity was under 95\%
-    \item[$LT_{99}$] contained the terms with a sparsity level below 99\%
+    \item[-- $LT_{90}$] contained terms with 90\% or less sparsity.
+    \item[-- $LT_{95}$] contained terms whose sparsity was under 95\%.
+    \item[-- $LT_{99}$] contained the terms with a sparsity level
+        below 99\%.
 \end{description}
 
 \subsection{Classification}
 
-To create the classifiers, we used 5 well knows algorithms: decision
+To create the classifiers, we used 5 well known algorithms: decision
 tree (DT), k-nearest neighbors (KNN), naive Bayes (NB), neural network
 (NN) and support vector
 machine -- with radial kernel (SVM\textsubscript{RK}) and linear
 kernel (SVM\textsubscript{LK}).
-
-For the process of training a
 
 We trained each of the classifiers three different times, one for each
 list of terms ($LT_{99}$, $LT_{95}$ and $LT_{90}$). Then we evaluated
@@ -571,7 +570,7 @@ threshold.
 \begin{center}
 \begin{tabular}{l|SS}
     & \parbox{6em}{\centering Sparsity\\threshold (\%)}  &
-    \parbox{5em}{\centering Number\\of terms}   \\\hline
+    \parbox{5em}{\centering Number of\\terms left}   \\\hline
     $LT_{90}$ &  90                 &  45 \\
     $LT_{95}$ &  95                 & 139 \\
     $LT_{99}$ &  99                 & 912 \\
@@ -625,10 +624,10 @@ highlighted in bold.
     \caption{Categories confusion matrix ($LT_{99}$ with KNN)}
 \begin{center}
 \begin{tabular}{l|rrrrrrrr}
-& \rotatebox{75}{science}    & \rotatebox{75}{culture}  &
-    \rotatebox{75}{sports} & \rotatebox{75}{economics} &
-    \rotatebox{75}{international}    & \rotatebox{75}{music}   &
-    \rotatebox{75}{national}     & \rotatebox{75}{politics} \\\hline
+& \rotatebox{45}{science}        & \rotatebox{45}{culture}   &
+  \rotatebox{45}{sports}         & \rotatebox{45}{economics} &
+  \rotatebox{45}{international}  & \rotatebox{45}{music}     &
+  \rotatebox{45}{national}       & \rotatebox{45}{politics} \\\hline
 science       & {\bf 127} & 19        & 1          & 6         & 12       & 24        & 11       & 0 \\
 culture       & 5         & {\bf 102} & 2          & 2         & 3        & 79        & 6        & 1 \\
 sports        & 1         & 3         & {\bf  168} & 7         & 3        & 14        & 4        & 0 \\
@@ -652,15 +651,15 @@ memory footprint of a classifier, a parameter which is of the utmost
 importance if the goal is to implement a classifier as lightweight as
 possible. The training time is also relevant, as shorter training
 times give the possibility of retraining the classifiers more often,
-allowing them to be updated as the corpus of news articles grows.
+allowing them to be updated as the corpus of articles grows in size.
 
 Looking at the actual results obtained and represented in
 Tables~\ref{tab:size} and \ref{tab:exectime} we can see that $LT_{90}$
 has simultaneously the smallest list of terms (45) and the shortest
-training time (12 seconds using the decision tree algorithm). However,
-$LT_{90}$ also presents the worst error rates, even when looking at
-the algorithm which achieved its best results (0.60 using a decision
-tree classifier).
+training time (12 seconds using the DT algorithm). However, $LT_{90}$
+also presents the worst error rates, even when looking at the
+algorithm which achieved its best results (0.60 using a DT
+classifier).
 
 On the opposite side, $LT_{99}$ presented the lowest error rates (0.35
 using a k-nearest neighbors classifier), but it took almost one hour
@@ -670,14 +669,14 @@ The results obtained confirm that there is a tradeoff between the size
 of the list of terms and the training time, on the one hand, and the
 classifier error rate, on the other. However, a list of 912 terms
 seems to be an acceptable memory footprint for a client side
-classifier; additionally, the additional training time would not present
+classifier; additionally, the higher training time would not present
 much problems in this scenario, as the classifier would be trained
-before hand and thus would not be visible on the client side.
+beforehand and thus not be visible on the client side.
 
 Given the reasonable values for the training time and the size of the
 list of terms, and looking to the error rate obtained in each of tests
 performed, we can conclude that the best option was to use the largest
-list of terms ($LT_{99}$) and the k-nearest neighbors classifier.
+list of terms ($LT_{99}$) and the KNN classifier.
 
 It is worth noting that the categories of an article are not mutually
 exclusive. In fact, an article can be classified as belonging to more
@@ -696,15 +695,15 @@ evaluate them can be found at\\
 
 The tasks and results previously described already provide useful
 insights into this matter. However, the lowest error rate obtained
-(0.35), despite already acceptable, might still be improved, either by
-trying new algorithms, fine tuning the ones already tested, or by
-increasing the train corpus.
+(0.35) might still be improved upon, either by leveraging new
+algorithms, fine tuning the ones already tested, or by increasing the
+train corpus.
 
 We have established that it is in fact possible
 to develop a news article classifier which is lightweight enough to be
 used (in real time) on the client side of a web application. The
-following step will be the actual implementation, probably in the form
-of a JavaScript library, of such a classifier.
+following step will be the actual implementation of the classifier,
+probably in the form of a JavaScript library.
 
 
 \section*{Acknowledgment}
